@@ -47,6 +47,6 @@ month = datetime.now().month
 day = datetime.now().day
 
 for i in range(49):
-    s.enterabs(datetime(2022, month, day, 2, 12, 20, 30 * i).timestamp(), 1, job)
+    s.enterabs(datetime(2022, month, day, 10, 0, 0, 30 * i).timestamp(), 1, job)
 
 s.run()
