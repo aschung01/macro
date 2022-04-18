@@ -6,10 +6,10 @@ import subprocess
 
 button = '532 2166'  # x y 1080/4095 2285/4095
 count = 0
-adb = subprocess.Popen(args=['adb.exe', 'start-server'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, shell=True)
 
 def connect():
     # Default is "127.0.0.1" and 5037
+    adb = subprocess.Popen(args=['adb.exe', 'start-server'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, shell=True)
     client = AdbClient(host="127.0.0.1", port=5037)
 
     devices = client.devices()
@@ -29,10 +29,10 @@ def job():
     global count
     count += 1
     device.shell(f'input tap {button}')
-    print('tap ' + str(count))
-    if count == 49:
+    print(str(datetime.now().timestamp()) + ': tap ' + str(count))
+    if count == 100:
         print('축하드려요!!')
-        adb.terminate()
+        # adb.terminate()
 
 
 if __name__ == '__main__':
@@ -46,7 +46,8 @@ print('좋은 아침입니다!! 뱅크샐러드 유전자 검사 페이지를 �
 month = datetime.now().month
 day = datetime.now().day
 
-for i in range(49):
-    s.enterabs(datetime(2022, month, day, 10, 0, 0, 30 * i).timestamp(), 1, job)
+for i in range(50):
+    s.enterabs(datetime(2022, month, day, 9, 59, 59, 999950 + 1 * i).timestamp(), 1, job)
+    s.enterabs(datetime(2022, month, day, 10, 0, 0, 1 * i).timestamp(), 1, job)
 
 s.run()
